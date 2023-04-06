@@ -143,7 +143,7 @@ public class Wood {
 
     private void changeColToInt(boolean trueIfVertical) {
         boolean check = true;        
-        Wood wood = new Wood(); 
+        Wood wood =new Wood(); 
         
         while (check) {
             if (trueIfVertical) {
@@ -159,13 +159,13 @@ public class Wood {
     private boolean putVertically() {
         Pattern pt1 = Pattern.compile("^[1-8]*$");
         System.out.println("나무 판자는 세로로 놓입니다. col 값을 입력하세요: (1,2,3,4,5,6,7,8) ");
-        String col = input.nextLine();
+        String col = input.next();
         Matcher matcher1 = pt1.matcher(col); 
         if (matcher1.find()) {
             colWood = 2 * Integer.parseInt(col);
             return false;
         }
-        input.nextLine();
+        //input.nextLine();
         System.out.println("나무 판자는 세로로 놓입니다. col 값을 다시 입력하세요: ");
         return true;
     }
@@ -173,13 +173,13 @@ public class Wood {
     private boolean putHorizontally(){
         String pt2 = "^[a-i]*$";
         System.out.println("나무 판자는 가로로 놓입니다. col 값을 입력하세요: (a,b,c,d,e,f,g,h,i) ");
-        String col = input.nextLine();
+        String col = input.next();
         boolean regex2 = Pattern.matches(pt2, col); 
         if (regex2) {
             colWood = 2 * ((int)col.charAt(0) - (int)'a') + 1;
             return false;
         }
-        input.nextLine();
+        //input.nextLine();
         System.out.println("나무 판자는 가로로 놓입니다. col 값을 다시 입력하세요: "); 
         return true; 
     }
