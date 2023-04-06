@@ -1,13 +1,11 @@
 package partition;
 
-<<<<<<< HEAD
 import java.util.Scanner;
 import java.util.regex.*;
 
 import board.*;
 import bfs.BFS;
 import players.Player;
-import partition.*;
 
 
 public class Wood {
@@ -185,8 +183,4 @@ public class Wood {
         System.out.println("나무 판자는 가로로 놓입니다. col 값을 다시 입력하세요: "); 
         return true; 
     }
-=======
-public class Wood {
-    
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
 }

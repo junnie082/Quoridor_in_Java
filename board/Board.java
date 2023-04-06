@@ -1,6 +1,5 @@
 package board;
 
-<<<<<<< HEAD
 import java.util.*;
 
 import players.*; 
@@ -126,21 +125,11 @@ public class Board {
         }
         mainBoard[rowWood][colWood+2] = 'ㅡ';
         mainBoard[rowWood][colWood+1] = 'ㅡ';
-=======
-import players.*; 
-
-public class Board {
-    private static int[][] mainBoard = new int[18][18];
-
-    public int[][] getMainBoard() {
-        return this.mainBoard;
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
     }
 
     public void setPos(Player player) {
         int row = player.getRowPos();
         int col = player.getColPos();
-<<<<<<< HEAD
         System.out.println("row: " + row + "col: " + col); 
         int a = player.getPlayerNum();
         if (a == 1) {
@@ -152,7 +141,7 @@ public class Board {
         }
     }
 
-    public void printMainBoard() {
+    public static void printMainBoard() {
         for (int i = 0; i <= 17; i++) {
             for (int j = 0; j <= 17; j++) {
                 if (i == 0 && j % 2 == 0) System.out.print(Color.FONT_GREEN + (char)((j+1)/2 + '0') + " " + Color.RESET);
@@ -173,21 +162,10 @@ public class Board {
                         System.out.print(Color.FONT_YELLOW + "| " + Color.RESET);
                     else System.out.print(mainBoard[i][j] + " ");
                 }
-=======
-
-        mainBoard[row][col] = player.getPlayerNum();
-    }
-
-    public void printMainBoard() {
-        for (int i = 1; i <= 17; i++) {
-            for (int j = 1; j <= 17; j++) {
-                System.out.print(mainBoard[i][j]);
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
             }
             System.out.println();
         }
     }
-<<<<<<< HEAD
 
     public void checkBoundary(int pos) {
         if (pos < 1 || pos > 17) {
@@ -195,6 +173,4 @@ public class Board {
             throw new IndexOutOfBoundsException();
         }
     }
-=======
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
 }

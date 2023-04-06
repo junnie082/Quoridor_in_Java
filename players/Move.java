@@ -1,7 +1,6 @@
 package players;
 
 import java.util.Scanner;
-import players.*;
 
 public class Move {
 

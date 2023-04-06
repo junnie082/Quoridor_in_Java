@@ -1,34 +1,22 @@
 package players;
 
-<<<<<<< HEAD
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import board.*;
 import moves.Move;
 import partition.*;
-=======
-import java.util.Scanner;
-
-import board.*;
-import players.*;
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
 
 public class Player {
 
     private int playerNum;
     private int rowPos; 
     private int colPos;
-<<<<<<< HEAD
     private int numberOfPartitions = 10;
-=======
-    private static int numberOfPartitions = 10;
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
 
     Scanner input = new Scanner(System.in); 
     Board board = new Board();
     Move move = new Move(); 
-<<<<<<< HEAD
     Wood wood = new Wood(); 
 
     public int getPartitionNum() {
@@ -80,21 +68,6 @@ public class Player {
             }
         }
         return action; 
-=======
-
-    public void turn() {
-        System.out.println("Player" + playerNum + ", 말을 움직이려면 1, 판을 놓으려면 0을 입력하세요.");
-        int action = input.nextInt(); 
-
-        if (action == 1) {
-            board.getMainBoard()[this.rowPos][this.colPos] = 0;
-            move.selectDirection(this);
-            board.setPos(this);
-        } else {
-            
-        }
-        
->>>>>>> d0d6d37 ([FEAT] 2023.3.30. 쿼리도 프로젝트 시작. Main, Board, Wood, Move, Player 클래스 구현)
     }
 
     public void setPlayerNum(int playerNum) {
