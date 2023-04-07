@@ -80,15 +80,6 @@ public class BFS {
         return true;  // 플레이어가 상대편 진영에 도달할 수 있는 가능성이 없음. 
     }
 
-    // private static void printVisited() {
-    //     for (int i = 1; i <= 17; i++) {
-    //         for (int j = 1; j <= 17; j++) {
-    //             System.out.print(visited[i][j] + " ");
-    //         }
-    //         System.out.println();
-    //     }
-    // }
-
     private boolean bfsCheckWood(int row, int col) {
         char boardVal = Board.mainBoard[row][col];
         if (boardVal == 'ㅡ' || boardVal == '|' || visited[row][col] == 2) {

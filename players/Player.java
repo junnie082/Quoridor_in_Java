@@ -24,28 +24,51 @@ public class Player {
     }
 
     public boolean wins() {
+            System.out.println("************************");
         if (playerNum == 1 && rowPos == 17) {
-            System.out.println("Player 1 WINS!!!");
+            System.out.println("**  Player 1 WINS!!!  **");
             return true;
         }
         else if (playerNum == 2 && rowPos == 1) {
-            System.out.println("Player 2 WINS!!!");
+            System.out.println("**  Player 2 WINS!!!  **");
             return true; 
         }
+            System.out.println("************************");
         return false; 
     }
 
     public void turn(Player p1, Player p2) {
         Player p = new Player(); 
-        System.out.println("Player" + playerNum + ", 말을 움직이려면 1, 판을 놓으려면 0을 입력하세요.");
-        int action = inputAction();
+        boolean check = true;
 
-        if (action == 1) { // 말을 움직이려 할 때 
-            p.movePlayer(this);
-        } else { // 판을 놓으려 할 때
-            wood.putWood(p1, p2);
-            this.numberOfPartitions--;  // 나무 판자 개수 하나 줄어듦. 
+        printPlayerInfo();
+
+        while (check) {
+            System.out.println("Player" + playerNum + ", 말을 움직이려면 1, 판을 놓으려면 0을 입력하세요.");
+            int action = inputAction();
+
+            if (action == 1) { // 말을 움직이려 할 때 
+                p.movePlayer(this);
+            } else { // 판을 놓으려 할 때
+                if (this.numberOfPartitions == 0) {
+                    thereIsNoPartition();
+                    continue;
+                }
+                wood.putWood(p1, p2);
+                this.numberOfPartitions--;  // 나무 판자 개수 하나 줄어듦.
+                check = false; 
+            }
         }
+    }
+
+    private void printPlayerInfo() {
+        System.out.println("Player" + playerNum + " 의 차례");
+        System.out.println("현재 위치는 (" + rowPos + ", " + colPos + ") 이며");
+        System.out.println("남은 나무 판자의 개수는 " + numberOfPartitions + " 입니다. ");
+    }
+
+    private void thereIsNoPartition() {
+        System.out.println("남은 나무 판자가 없습니다. 플레이어 " + playerNum + "의 남은 나무 판자의 개수: " + numberOfPartitions);
     }
 
     private void movePlayer(Player player) {
