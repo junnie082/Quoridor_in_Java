@@ -15,6 +15,13 @@ public class BFS {
             for (int j = 1; j <= 17; visited[i][j++] = 0);
         }
     }
+
+    public static void printVisited() {
+        for (int i = 1; i <= 17; i++) {
+            for (int j = 1; j <= 17; j++) System.out.print(visited[i][j] + " "); 
+            System.out.println(); 
+        }
+    }
     
     public boolean isThereAtLeastOneWay(Player player) {
         int currRow = player.getRowPos();

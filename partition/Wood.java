@@ -43,8 +43,16 @@ public class Wood {
             if (check) continue;
                 // check 가 true 면 이미 해당 방향에 장애물이 있다.
             check = bfs.isThereAtLeastOneWay(player1);
-            check = check || bfs.isThereAtLeastOneWay(player2); 
             
+            if (check) {  // false 면 가능성 없음.
+                System.out.println("플레이어가 상대 진영에 도달할 수 있는 경로가 최소 한 개 이상이어야 합니다. 다시 입력하세요. row col direction");
+                Board.mainBoard[rowWood][colWood] = '*';
+                resetBoardVal(); 
+            }
+
+            check = bfs.isThereAtLeastOneWay(player2);
+
+
             if (check) {  // false 면 가능성 없음.
                 System.out.println("플레이어가 상대 진영에 도달할 수 있는 경로가 최소 한 개 이상이어야 합니다. 다시 입력하세요. row col direction");
                 Board.mainBoard[rowWood][colWood] = '*';
@@ -65,7 +73,7 @@ public class Wood {
         }
         else if (woodDirection.equals("x")) {
             Board.mainBoard[rowWood+1][colWood] = ' ';
-            Board.mainBoard[rowWood+2][colWood+2] = '*';
+            Board.mainBoard[rowWood+2][colWood] = '*';
         }
         else if (woodDirection.equals("a")) {
             Board.mainBoard[rowWood][colWood-1] = ' ';
@@ -121,10 +129,13 @@ public class Wood {
         String pt2 = "^[a-i]*$";
         Matcher matcher1 = pt1.matcher(row); 
         boolean regex2 = Pattern.matches(pt2, row); 
+        boolean check = true;
 
         if (matcher1.find()) {
             // 12345678
-            rowWood = 2 * Integer.parseInt(row);
+           
+            rowWood = 2 * Integer.parseInt(row); 
+                
         } else if (regex2) {
             // abcdefghi
             rowWood = 2 * ((int)row.charAt(0) - (int)'a') + 1;

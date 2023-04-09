@@ -39,7 +39,6 @@ public class Board {
         String directionWood = wood.getWoodDirection();
 
         boolean check = true;
-
      
         check = encounter.checkWood(rowWood, colWood); 
         if (check) {

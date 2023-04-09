@@ -6,6 +6,7 @@ import java.util.Scanner;
 import board.*;
 import moves.Move;
 import partition.*;
+import bfs.*;
 
 public class Player {
 
@@ -24,16 +25,19 @@ public class Player {
     }
 
     public boolean wins() {
-            System.out.println("************************");
         if (playerNum == 1 && rowPos == 17) {
+            System.out.println("************************");
             System.out.println("**  Player 1 WINS!!!  **");
+            System.out.println("************************");
             return true;
         }
         else if (playerNum == 2 && rowPos == 1) {
+            System.out.println("************************");
             System.out.println("**  Player 2 WINS!!!  **");
+            System.out.println("************************");
+
             return true; 
         }
-            System.out.println("************************");
         return false; 
     }
 
@@ -49,6 +53,7 @@ public class Player {
 
             if (action == 1) { // 말을 움직이려 할 때 
                 p.movePlayer(this);
+                check = false;
             } else { // 판을 놓으려 할 때
                 if (this.numberOfPartitions == 0) {
                     thereIsNoPartition();
@@ -57,6 +62,8 @@ public class Player {
                 wood.putWood(p1, p2);
                 this.numberOfPartitions--;  // 나무 판자 개수 하나 줄어듦.
                 check = false; 
+
+                BFS.printVisited();
             }
         }
     }
