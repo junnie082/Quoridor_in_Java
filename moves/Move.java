@@ -58,7 +58,7 @@ public class Move {  // 이 클래스는 사실 Player 와 Wood 둘 다 사용�
         check = encounter.checkPlayer(player, currRow, currCol); // 나무 판자가 없다면 이번에는 해당 방향에 플레이어가 있나 확인. 
         if (check) { // 해당 방향에 플레이어 있으면, 건너 뛰어야 함. 
             currRow -= 1;
-            board.checkBoundary(currRow-1); 
+            board.checkBoundary(currRow); 
             check = encounter.checkWood(currRow-1, currCol);
             if (check) return true;
             currRow -= 1;

@@ -88,6 +88,7 @@ public class Board {
         }
         mainBoard[rowWood-2][colWood] = '|';
         mainBoard[rowWood-1][colWood] = '|';
+        mainBoard[rowWood][colWood] = '|';
     }
 
     private void putWoodDown(int rowWood, int colWood) {

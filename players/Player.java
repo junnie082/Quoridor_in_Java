@@ -59,13 +59,20 @@ public class Player {
                     thereIsNoPartition();
                     continue;
                 }
-                wood.putWood(p1, p2);
+                check = wood.putWood(p1, p2);
+                if (check) continue;
                 this.numberOfPartitions--;  // 나무 판자 개수 하나 줄어듦.
                 check = false; 
 
                 BFS.printVisited();
             }
         }
+    }
+
+    private void movePlayer(Player player) {
+        Board.mainBoard[player.rowPos][player.colPos] = '0';
+        move.selectDirection(player);
+        board.setPos(player);
     }
 
     private void printPlayerInfo() {
@@ -78,11 +85,7 @@ public class Player {
         System.out.println("남은 나무 판자가 없습니다. 플레이어 " + playerNum + "의 남은 나무 판자의 개수: " + numberOfPartitions);
     }
 
-    private void movePlayer(Player player) {
-        Board.mainBoard[player.rowPos][player.colPos] = '0';
-        move.selectDirection(player);
-        board.setPos(player);
-    }
+   
 
     private int inputAction() {
         int action; 
