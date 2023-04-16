@@ -1,6 +1,9 @@
 package moves;
 
 import players.*;
+
+import java.util.Scanner;
+
 import board.*;
 import partition.Wood;
 
@@ -34,5 +37,13 @@ public class Encounter {
         }
         return false;
     }
+
+    // public void playerOnTheUpSide() {
+    //     Scanner input = new Scanner(System.in); 
+    //     System.out.println("상대 플레이어의 위쪽에 나무 판자가 있습니다. 상대를 뛰어 넘어 왼쪽으로 이동하시겠습니까 (a), 오른쪽으로 이동하시겠습니까 (d)");
+    //     String leftOrRight = input.next();
+
+    //     if (leftOrRight.eqauls("a")); 
+    // }
 
 }

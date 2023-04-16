@@ -39,7 +39,6 @@ public class Board {
         String directionWood = wood.getWoodDirection();
 
         boolean check = true;
-
      
         check = encounter.checkWood(rowWood, colWood); 
         if (check) {
@@ -89,6 +88,7 @@ public class Board {
         }
         mainBoard[rowWood-2][colWood] = '|';
         mainBoard[rowWood-1][colWood] = '|';
+        mainBoard[rowWood][colWood] = '|';
     }
 
     private void putWoodDown(int rowWood, int colWood) {

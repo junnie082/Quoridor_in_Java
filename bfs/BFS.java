@@ -15,6 +15,21 @@ public class BFS {
             for (int j = 1; j <= 17; visited[i][j++] = 0);
         }
     }
+
+    public static void printVisited() {
+        // for (int i = 1; i <= 17; i++) {
+        //     for (int j = 1; j <= 17; j++) System.out.print(visited[i][j] + " "); 
+        //     System.out.println(); 
+        // }
+        for (int i = 1; i <= 17; i++) {
+            for (int j = 1; j <= 17; j++) {
+                if (visited[i][j] == 1) System.out.print("1 "); 
+                else if (Board.mainBoard[i][j] == '|' || Board.mainBoard[i][j] == 'ㅡ') System.out.print("2 ");
+                else System.out.print("0 ");
+            }
+            System.out.println(); 
+        }
+    }
     
     public boolean isThereAtLeastOneWay(Player player) {
         int currRow = player.getRowPos();
@@ -80,15 +95,6 @@ public class BFS {
         return true;  // 플레이어가 상대편 진영에 도달할 수 있는 가능성이 없음. 
     }
 
-    // private static void printVisited() {
-    //     for (int i = 1; i <= 17; i++) {
-    //         for (int j = 1; j <= 17; j++) {
-    //             System.out.print(visited[i][j] + " ");
-    //         }
-    //         System.out.println();
-    //     }
-    // }
-
     private boolean bfsCheckWood(int row, int col) {
         char boardVal = Board.mainBoard[row][col];
         if (boardVal == 'ㅡ' || boardVal == '|' || visited[row][col] == 2) {
@@ -99,12 +105,10 @@ public class BFS {
     }
 
     private boolean checkArrival(int playerNum, int currRow, int currCol) {
-        
         if (playerNum == 1 && currRow == 17) return true;
         else if (playerNum == 2 && currRow == 1) return true;
         
         return false;
-
     }
 
     private void addPath(Queue<Pair> que, int currRow, int currCol) {

@@ -29,9 +29,10 @@ public class Wood {
         return this.woodDirection;
     }
 
-    public void putWood(Player player1, Player player2) {
+    public boolean putWood(Player player1, Player player2) {
         boolean check = true;
         BFS bfs = new BFS(); 
+
         while (check) {
             changeRowToInt();
             boolean trueIfVertical = decideVerticalOrHorizontal();
@@ -41,16 +42,27 @@ public class Wood {
 
             check = board.putWoodOnBoard(trueIfVertical);
             if (check) continue;
-                // check 가 true 면 이미 해당 방향에 장애물이 있다.
+            // check 가 true 면 이미 해당 방향에 장애물이 있다.
             check = bfs.isThereAtLeastOneWay(player1);
-            check = check || bfs.isThereAtLeastOneWay(player2); 
             
             if (check) {  // false 면 가능성 없음.
                 System.out.println("플레이어가 상대 진영에 도달할 수 있는 경로가 최소 한 개 이상이어야 합니다. 다시 입력하세요. row col direction");
                 Board.mainBoard[rowWood][colWood] = '*';
                 resetBoardVal(); 
+                return true;
             }
+
+            check = bfs.isThereAtLeastOneWay(player2);
+
+            if (check) {  // false 면 가능성 없음.
+                System.out.println("플레이어가 상대 진영에 도달할 수 있는 경로가 최소 한 개 이상이어야 합니다. 다시 입력하세요. row col direction");
+                Board.mainBoard[rowWood][colWood] = '*';
+                resetBoardVal(); 
+                return true;
+            }
+
         }
+        return false; 
     }
 
     private void resetBoardVal() {
@@ -65,7 +77,7 @@ public class Wood {
         }
         else if (woodDirection.equals("x")) {
             Board.mainBoard[rowWood+1][colWood] = ' ';
-            Board.mainBoard[rowWood+2][colWood+2] = '*';
+            Board.mainBoard[rowWood+2][colWood] = '*';
         }
         else if (woodDirection.equals("a")) {
             Board.mainBoard[rowWood][colWood-1] = ' ';
@@ -114,20 +126,25 @@ public class Wood {
     }
 
     private void changeRowToInt() {
-        System.out.println("나무 판자를 놓을 좌표의 row 값을 입력하세요: row");
-        String row = input.next();
+        while (true) {
+            System.out.println("나무 판자를 놓을 좌표의 row 값을 입력하세요: row");
+            String row = input.next();
 
-        Pattern pt1 = Pattern.compile("^[1-8]*$");
-        String pt2 = "^[a-i]*$";
-        Matcher matcher1 = pt1.matcher(row); 
-        boolean regex2 = Pattern.matches(pt2, row); 
+            Pattern pt1 = Pattern.compile("^[1-8]*$");
+            String pt2 = "^[a-i]*$";
 
-        if (matcher1.find()) {
-            // 12345678
-            rowWood = 2 * Integer.parseInt(row);
-        } else if (regex2) {
-            // abcdefghi
-            rowWood = 2 * ((int)row.charAt(0) - (int)'a') + 1;
+            Matcher matcher1 = pt1.matcher(row); 
+            boolean regex2 = Pattern.matches(pt2, row); 
+
+            if (matcher1.find()) {
+                // 12345678
+                rowWood = 2 * Integer.parseInt(row); 
+            } else if (regex2) {
+                // abcdefghi
+                rowWood = 2 * ((int)row.charAt(0) - (int)'a') + 1;
+            }
+            if (rowWood >= 1 && rowWood <= 17) break;
+            System.out.println("1부터 8까지의 숫자만 입력하세요.");
         }
     }
 
@@ -142,45 +159,45 @@ public class Wood {
     }
 
     private void changeColToInt(boolean trueIfVertical) {
-        boolean check = true;        
-        Wood wood =new Wood(); 
-        
-        while (check) {
-            if (trueIfVertical) {
-                // vertical
-                check = wood.putVertically();                
-            } else {
-                // horizontal
-                check = wood.putHorizontally();
-            }
-        }
+        Wood wood =new Wood();  
+        if (trueIfVertical) {
+            // vertical
+            wood.putVertically();                
+        } else {
+            // horizontal
+            wood.putHorizontally();
+        }   
     }
 
-    private boolean putVertically() {
+    private void putVertically() {
         Pattern pt1 = Pattern.compile("^[1-8]*$");
         System.out.println("나무 판자는 세로로 놓입니다. col 값을 입력하세요: (1,2,3,4,5,6,7,8) ");
-        String col = input.next();
-        Matcher matcher1 = pt1.matcher(col); 
-        if (matcher1.find()) {
-            colWood = 2 * Integer.parseInt(col);
-            return false;
+        
+        while (true) {
+            String col = input.next();
+            Matcher matcher1 = pt1.matcher(col); 
+            if (matcher1.find()) {
+                colWood = 2 * Integer.parseInt(col);
+                if (colWood >= 1 && colWood <= 17) return; 
+                System.out.println("1부터 8까지의 숫자나 a부터 i까지의 알파벳만 입력하세요.");
+            }
+            System.out.println("나무 판자는 세로로 놓입니다. col 값을 다시 입력하세요: ");
         }
-        //input.nextLine();
-        System.out.println("나무 판자는 세로로 놓입니다. col 값을 다시 입력하세요: ");
-        return true;
     }
 
-    private boolean putHorizontally(){
+    private void putHorizontally(){
         String pt2 = "^[a-i]*$";
         System.out.println("나무 판자는 가로로 놓입니다. col 값을 입력하세요: (a,b,c,d,e,f,g,h,i) ");
-        String col = input.next();
-        boolean regex2 = Pattern.matches(pt2, col); 
-        if (regex2) {
-            colWood = 2 * ((int)col.charAt(0) - (int)'a') + 1;
-            return false;
+
+        while (true) {
+            String col = input.next();
+            boolean regex2 = Pattern.matches(pt2, col); 
+            if (regex2) {
+                colWood = 2 * ((int)col.charAt(0) - (int)'a') + 1;
+                if (colWood >= 1 && colWood <= 17) return;
+                System.out.println("1부터 8까지의 숫자나 a부터 i까지의 알파벳만 입력하세요.");
+            }
+            System.out.println("나무 판자는 가로로 놓입니다. col 값을 다시 입력하세요: "); 
         }
-        //input.nextLine();
-        System.out.println("나무 판자는 가로로 놓입니다. col 값을 다시 입력하세요: "); 
-        return true; 
     }
 }
