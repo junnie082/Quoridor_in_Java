@@ -52,8 +52,8 @@ public class Player {
             int action = inputAction();
 
             if (action == 1) { // 말을 움직이려 할 때 
-                p.movePlayer(this);
-                check = false;
+                if (p.movePlayer(this)) check = true;
+                else check = false;
             } else { // 판을 놓으려 할 때
                 if (this.numberOfPartitions == 0) {
                     thereIsNoPartition();
@@ -69,10 +69,16 @@ public class Player {
         }
     }
 
-    private void movePlayer(Player player) {
+    private boolean movePlayer(Player player) {
         Board.mainBoard[player.rowPos][player.colPos] = '0';
-        move.selectDirection(player);
+        if(move.selectDirection(player)) {
+            if (playerNum == 1) Board.mainBoard[player.rowPos][player.colPos] = '1';
+            else if (playerNum == 2) Board.mainBoard[player.rowPos][player.colPos] = '2';
+            return true; // move.selecDirection(player) 이 true 면 입력을 다시 받아야 함. 
+        }
+        
         board.setPos(player);
+        return false; 
     }
 
     private void printPlayerInfo() {
